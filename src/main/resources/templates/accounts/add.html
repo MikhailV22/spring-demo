@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{Layout}"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Content page 1</title>
+    <script src="content-script.js"></script>
+</head>
+<body>
+<div layout:fragment="content">
+    <p>New user</p>
+    <form action="#" th:action="@{/addaccount}"  method="post">
+        <input type="text" name="name"/>
+        <input type="text" name="email"/>
+        <input type="submit" value="Submit"/>
+        <input type="reset" value="Reset"/>
+    </form>
+</div>
+
+<div layout:fragment="custom-footer">
+    <p>footer for <b>Shoes</b></p>
+</div>
+</body>
+</html>

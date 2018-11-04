@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Layout page</title>
+  <script src="common-script.js"></script>
+  <link href="../css/main.css" th:href="@{/css/main.css}" rel="stylesheet" type="text/css" media="all">
+</head>
+<body>
+  <header>
+    <h1>My website</h1>
+  </header>
+
+  <div th:replace="topmenu :: header">...</div>
+
+  <section layout:fragment="content">
+    <p>Page content goes here</p>
+  </section>
+  <footer>
+    <div layout:fragment="custom-footer"></div>
+  </footer>  
+</body>
+</html>
