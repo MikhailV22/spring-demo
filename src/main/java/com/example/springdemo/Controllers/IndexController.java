@@ -26,8 +26,8 @@ public class IndexController {
     @Autowired
     private AccountRepository accountRepository;
 
-    @Autowired
-    private Test test;
+//    @Autowired
+//    private Test test;
 
 //    private final VisitsRepository visitsRepository;
 //
@@ -40,7 +40,7 @@ public class IndexController {
         Map<String, Object> model = new HashMap<>();
         model.put("name", "Alexey");
         model.put("massages",messageRepository.findAll());
-        System.out.println(test.toString());
+//        System.out.println(test.toString());
 //        Visit visit = new Visit();
 //        visit.description = String.format("Visited at %s", LocalDateTime.now());
 //        visitsRepository.save(visit);

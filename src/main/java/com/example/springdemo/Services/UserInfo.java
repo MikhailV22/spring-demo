@@ -7,7 +7,8 @@ import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 import org.springframework.web.context.annotation.SessionScope;
 
-
+@SessionScope
+@Component
 public class UserInfo {
 //    @Autowired
     private Account account;
@@ -18,6 +19,12 @@ public class UserInfo {
 
     public void setAccount(Account account) {
         this.account = account;
+    }
+
+
+    public UserInfo (Account account){
+        this.account=account;
+        System.out.println("userInfo.created");
     }
 
 }
