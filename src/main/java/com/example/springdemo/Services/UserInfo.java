@@ -27,4 +27,8 @@ public class UserInfo {
         System.out.println("userInfo.created");
     }
 
+//    public UserInfo (){
+//        System.out.println("userInfo.created.2");
+//    }
+
 }

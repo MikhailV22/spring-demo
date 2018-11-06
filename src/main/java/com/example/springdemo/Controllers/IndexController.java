@@ -39,7 +39,7 @@ public class IndexController {
     public ModelAndView index() {
         Map<String, Object> model = new HashMap<>();
         model.put("name", "Alexey");
-        model.put("massages",messageRepository.findAll());
+//        model.put("massages",messageRepository.findAll());
 //        System.out.println(test.toString());
 //        Visit visit = new Visit();
 //        visit.description = String.format("Visited at %s", LocalDateTime.now());
@@ -87,23 +87,23 @@ public class IndexController {
 
 
     //  http://localhost:8080/add?name=First&email=someemail@someemailprovider.com
-    @GetMapping(path="/add2") // Map ONLY GET Requests
-    public @ResponseBody String addNewMessage (@RequestParam String name
-            , @RequestParam String email) {
-        // @ResponseBody means the returned String is the response, not a view name
-        // @RequestParam means it is a parameter from the GET or POST request
-
-        Message m = new Message();
-        m.setText("messege");
-
-        Account account = new Account();
-        account.setName(name);
-        account.setEmail(email);
-        account.getMessages().add(m);
-        accountRepository.save(account);
-//        messageRepository.save(m);
-        return "Saved";
-    }
+//    @GetMapping(path="/add2") // Map ONLY GET Requests
+//    public @ResponseBody String addNewMessage (@RequestParam String name
+//            , @RequestParam String email) {
+//        // @ResponseBody means the returned String is the response, not a view name
+//        // @RequestParam means it is a parameter from the GET or POST request
+//
+//        Message m = new Message();
+//        m.setText("messege");
+//
+//        Account account = new Account();
+//        account.setName(name);
+//        account.setEmail(email);
+//        account.getMessages().add(m);
+//        accountRepository.save(account);
+////        messageRepository.save(m);
+//        return "Saved";
+//    }
 
     @GetMapping(path="/all")
     public @ResponseBody Iterable<Message> getAllUsers() {

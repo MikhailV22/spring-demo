@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 public class LoggerInterceptor extends HandlerInterceptorAdapter {
     private static Logger log = LoggerFactory.getLogger(LoggerInterceptor.class);
 
-    @Autowired
+//    @Autowired
     UserInfo userInfo;
 
     public UserInfo getUserInfo() {
@@ -60,5 +60,8 @@ public class LoggerInterceptor extends HandlerInterceptorAdapter {
         log.info("[afterCompletion][" + request + "][exception: " + ex + "]");
     }
 
+    public LoggerInterceptor(UserInfo userInfo) {
+        this.userInfo = userInfo;
+    }
 }
 

@@ -6,9 +6,13 @@ import com.example.springdemo.Services.AccountServise;
 import com.example.springdemo.Services.AccountServiseImpl;
 import com.example.springdemo.Services.UserInfo;
 import com.example.springdemo.Entity.Account;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Scope;
+import org.springframework.context.annotation.ScopedProxyMode;
 import org.springframework.stereotype.Service;
+import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.context.annotation.RequestScope;
 import org.springframework.web.context.annotation.SessionScope;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
@@ -26,14 +30,15 @@ public class AppConfig implements WebMvcConfigurer {
 
     @Bean
 //    @SessionScope
-    @RequestScope
-//    @Scope(value = WebApplicationContext.SCOPE_REQUEST, proxyMode = ScopedProxyMode.INTERFACES)
+//    @RequestScope
+//    @Scope("prototype")
+    @Scope(value = WebApplicationContext.SCOPE_SESSION, proxyMode = ScopedProxyMode.TARGET_CLASS)
     public Account account() {
         Account account = new Account();
         account.setName("from config");
         account.setId(0);
         account.setPassword("123");
-        System.out.println("account.created");
+        System.out.println("account.created (AppConfig)");
         return account;
     }
 
@@ -43,14 +48,18 @@ public class AppConfig implements WebMvcConfigurer {
     @SessionScope
     public UserInfo userInfo(Account account){
         UserInfo userInfo = new UserInfo(account);
+//        UserInfo userInfo = new UserInfo();
 //        userInfo.setAccount(account);
         System.out.println("userInfo.created");
         return userInfo;
     }
 
+    @Autowired
+    UserInfo userInfo;
+
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
-        registry.addInterceptor(new LoggerInterceptor());
+        registry.addInterceptor(new LoggerInterceptor(userInfo)).addPathPatterns("/accounts/**");
     }
 
 //    @Bean
