@@ -4,11 +4,13 @@ import com.example.springdemo.Entity.Account;
 import com.example.springdemo.Services.AccountServise;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.web.context.annotation.RequestScope;
 import org.springframework.web.context.annotation.SessionScope;
 
 import java.util.List;
 
 @SessionScope
+//@RequestScope
 @Component
 public class Auth {
     @Autowired

@@ -14,7 +14,7 @@ public class LoggerInterceptor extends HandlerInterceptorAdapter {
     private static Logger log = LoggerFactory.getLogger(LoggerInterceptor.class);
 
 //    @Autowired
-    UserInfo userInfo;
+    private UserInfo userInfo;
 
     public UserInfo getUserInfo() {
         return userInfo;
@@ -25,7 +25,7 @@ public class LoggerInterceptor extends HandlerInterceptorAdapter {
     }
 
     @Override
-    public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
+    public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)  {
         log.info("[preHandle][" + request + "]" + "[" + request.getMethod()
                 + "]" + request.getRequestURI()
 //                + getParameters(request)
@@ -45,15 +45,19 @@ public class LoggerInterceptor extends HandlerInterceptorAdapter {
             HttpServletRequest request,
             HttpServletResponse response,
             Object handler,
-            ModelAndView modelAndView) throws Exception {
+            ModelAndView modelAndView) {
 
         log.info("[postHandle][" + request + "]");
+        if(userInfo.getAccount().getId()!=0){
+            modelAndView.addObject("userStatus","logged");
+        }else{
+            modelAndView.addObject("userStatus","NOT logged");
+        }
     }
 
     @Override
     public void afterCompletion(
-            HttpServletRequest request, HttpServletResponse response,Object handler, Exception ex)
-            throws Exception {
+            HttpServletRequest request, HttpServletResponse response,Object handler, Exception ex){
         if (ex != null){
             ex.printStackTrace();
         }

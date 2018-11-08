@@ -4,6 +4,8 @@ import com.example.springdemo.Beans.Auth;
 import com.example.springdemo.Services.AccountServise;
 import com.example.springdemo.Entity.Account;
 import com.example.springdemo.Services.UserInfo;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,18 +21,39 @@ import java.util.List;
 public class LoginController {
 //    @Autowired
 //    private AccountRepository accountRepository;
+    private static Logger log = LoggerFactory.getLogger(LoginController.class);
 
-    @Autowired
-    UserInfo userInfo;
-
-    @Autowired
+    private UserInfo userInfo;
+    private Auth auth;
+    private Account account;
     private AccountServise accountServise;
 
-    @Autowired
-    private Auth auth;
+//    @Autowired
+//    public void setUserInfo(UserInfo userInfo) {
+//        this.userInfo = userInfo;
+//    }
+//
+//    @Autowired
+//    public void setAccountServise(AccountServise accountServise) {
+//        this.accountServise = accountServise;
+//    }
+//
+//    @Autowired
+//    public void setAuth(Auth auth) {
+//        this.auth = auth;
+//    }
+//
+//    @Autowired
+//    public void setAccount(Account account) {
+//        this.account = account;
+//    }
 
-    @Autowired
-    private Account account;
+    public LoginController(UserInfo userInfo, Auth auth, Account account, AccountServise accountServise) {
+        this.userInfo = userInfo;
+        this.auth = auth;
+        this.account = account;
+        this.accountServise = accountServise;
+    }
 
     @GetMapping("/login")
     public ModelAndView login(Model model){
@@ -49,7 +72,9 @@ public class LoginController {
     public String doLogin(@ModelAttribute Account account,
                           Model model){
 //        account.setName("---");
-        System.out.println("name."+account.getName());
+
+        log.info("name."+account.getName());
+
 //        userInfo.getAccount().setName(account.getName());
 //        List<Account> accounts = accountServise.findAccountByNameAndPassword(account.getName(),account.getPassword());
 //        System.out.println("size."+ accounts.size());

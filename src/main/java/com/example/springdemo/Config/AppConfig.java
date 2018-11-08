@@ -42,24 +42,36 @@ public class AppConfig implements WebMvcConfigurer {
         return account;
     }
 
-
     @Bean
 //    @RequestScope
     @SessionScope
-    public UserInfo userInfo(Account account){
-        UserInfo userInfo = new UserInfo(account);
+    public UserInfo userInfo(){
+        UserInfo userInfo = new UserInfo(account());
 //        UserInfo userInfo = new UserInfo();
 //        userInfo.setAccount(account);
-        System.out.println("userInfo.created");
+        System.out.println("userInfo.created (AppConfig)");
         return userInfo;
     }
 
-    @Autowired
-    UserInfo userInfo;
+//    @Bean
+////    @RequestScope
+//    @SessionScope
+//    public UserInfo userInfo(Account account){
+//        UserInfo userInfo = new UserInfo(account);
+////        UserInfo userInfo = new UserInfo();
+////        userInfo.setAccount(account);
+//        System.out.println("userInfo.created");
+//        return userInfo;
+//    }
+
+//    @Autowired
+//    UserInfo userInfo;
 
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
-        registry.addInterceptor(new LoggerInterceptor(userInfo)).addPathPatterns("/accounts/**");
+        System.out.println("addInterceptors (AppConfig)");
+//        registry.addInterceptor(new LoggerInterceptor(userInfo)).addPathPatterns("/accounts/**");
+        registry.addInterceptor(new LoggerInterceptor(userInfo())).addPathPatterns("/accounts/**");
     }
 
 //    @Bean
