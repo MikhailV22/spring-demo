@@ -10,4 +10,5 @@ public interface AccountRepository extends CrudRepository<Account, Integer> {
 //    public Account findByLogin(String login,String password);
     List<Account> findAccountByPassword(String password);
     List<Account> findAccountByNameAndPassword(String name,String password);
+    Account findAccountByName(String name);
 }

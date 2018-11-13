@@ -4,6 +4,7 @@ import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 
 @Entity
 public class Account {
@@ -21,6 +22,12 @@ public class Account {
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name = "USER_ID")
     private List<Message> messages = new ArrayList<>();
+
+
+    @ManyToMany
+    @JoinTable(name = "account_roles", joinColumns = @JoinColumn(name = "account_id"),
+    inverseJoinColumns = @JoinColumn(name = "role_id"))
+    private Set<Role> roles;
 
     public Account() {
     }
@@ -63,6 +70,14 @@ public class Account {
 
     public void setMessages(List<Message> messages) {
         this.messages = messages;
+    }
+
+    public Set<Role> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(Set<Role> roles) {
+        this.roles = roles;
     }
 
     @Override
