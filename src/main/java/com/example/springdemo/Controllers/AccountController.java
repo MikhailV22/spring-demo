@@ -29,7 +29,7 @@ public class AccountController {
         return "registration";
     }
 
-    @RequestMapping(value = "/registration",method = RequestMethod.Post)
+    @RequestMapping(value = "/registration",method = RequestMethod.POST)
     public String registration(@ModelAttribute("userForm") Account userForm, BindingResult bindingResult, Model model){
         userValidator.validate(userForm,bindingResult);
         if(bindingResult.hasErrors()){
