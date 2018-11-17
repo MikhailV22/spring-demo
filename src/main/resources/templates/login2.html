@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div layout:fragment="content">
+    <p>Login</p>
+    <div th:text="${error}"></div>
+    <div th:text="${userInfo.account.toString()}"></div>
+
+    <p>user_id-</p>
+    <div th:text="${userInfo.account.id}"></div>
+
+    <div th:if="${userInfo.account.id!=0}">
+        CONNECTED
+        <form action="#" th:action="@{/doLogout}" method="post">
+            <input type="submit" value="Выход"/>
+        </form>
+
+    </div>
+
+    <div th:if="${userInfo.account.id==0}">
+        <form action="#" th:action="@{/doLogin}" th:object="${account}" method="post"
+              >
+            <input type="text" name="name" th:field="*{name}"/>
+            <input type="text" name="password" th:field="*{password}"/>
+            <input type="submit" value="Вход"/>
+            <input type="reset" value="Отмена"/>
+        </form>
+    </div>
+</div>
+
+</body>
+</html>

@@ -27,8 +27,8 @@ public class Account {
     private List<Message> messages = new ArrayList<>();
 
 
-    @ManyToMany
-    @JoinTable(name = "account_roles", joinColumns = @JoinColumn(name = "account_id"),
+    @ManyToMany//(fetch = FetchType.EAGER)
+    @JoinTable(name = "account_roles", joinColumns = @JoinColumn(name = "account_id" ),
     inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<Role> roles;
 

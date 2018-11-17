@@ -5,6 +5,7 @@ import com.example.springdemo.Entity.Account;
 import com.example.springdemo.Entity.Message;
 import com.example.springdemo.Repo.MessageRepository;
 import com.example.springdemo.Repo.AccountRepository;
+import com.example.springdemo.Services.AccountServise;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -25,6 +26,9 @@ public class IndexController {
 
     @Autowired
     private AccountRepository accountRepository;
+
+    @Autowired
+    private AccountServise accountServise;
 
 //    @Autowired
 //    private Test test;
@@ -80,8 +84,6 @@ public class IndexController {
         account.setEmail(email);
         account.getMessages().add(m);
         accountRepository.save(account);
-//        messageRepository.save(m);
-        //return list();
         return "redirect:accounts";
     }
 
