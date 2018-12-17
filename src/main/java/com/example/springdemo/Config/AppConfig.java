@@ -1,18 +1,13 @@
 package com.example.springdemo.Config;
 
-import com.example.springdemo.Beans.Test;
 import com.example.springdemo.Interceptors.LoggerInterceptor;
 import com.example.springdemo.Services.UserInfo;
 import com.example.springdemo.Entity.Account;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Scope;
 import org.springframework.context.annotation.ScopedProxyMode;
-import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.context.annotation.SessionScope;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
@@ -52,13 +47,6 @@ public class AppConfig implements WebMvcConfigurer {
 //        auth.userDetailsService(userDetailsService).passwordEncoder(bCryptPasswordEncoder());
 //    }
 
-    @Bean
-    public Test test() {
-        Test test = new Test();
-        test.setId(10);
-        test.setText("this is text");
-        return test;
-    }
 
     @Bean
 //    @SessionScope

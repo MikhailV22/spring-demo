@@ -1,12 +1,14 @@
 package com.example.springdemo.Controllers;
 
-import com.example.springdemo.Beans.Test;
 import com.example.springdemo.Entity.Account;
 import com.example.springdemo.Entity.Message;
 import com.example.springdemo.Repo.MessageRepository;
 import com.example.springdemo.Repo.AccountRepository;
 import com.example.springdemo.Services.AccountServise;
+import com.example.springdemo.Services.MyUserPrincipal;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -43,6 +45,18 @@ public class IndexController {
     public ModelAndView index() {
         Map<String, Object> model = new HashMap<>();
         model.put("name", "Alexey");
+
+
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+
+        if (authentication != null && authentication.isAuthenticated()) {
+            if(authentication.getPrincipal() instanceof MyUserPrincipal) {
+                MyUserPrincipal user = (MyUserPrincipal) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+                System.out.println("email." + user.getAccount().getEmail());
+            }
+        }
+
+
 //        model.put("massages",messageRepository.findAll());
 //        System.out.println(test.toString());
 //        Visit visit = new Visit();
